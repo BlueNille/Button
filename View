@@ -1,0 +1,132 @@
+private Textview Adminlink,NotAdminlink;
+// then create a method inside on the oncreate block
+
+Adminlink = (Textview) findViewById(R.id.admin_panel_link);
+Adminlink = (Textview) findViewById(R.id.not_admin_panel_link);
+
+//  then add  this two methods on a clink listener (Adminlink)
+
+Adminlink.setOnClickListener(new view.OnClickListener()){
+  @Override
+  public void onClick(View view){
+    LoginButton.setText("Login Admin");
+    AdminLink.setVisbility(View.INVISIBLE);
+    NotAdminlink.setVisbility(View.VISIBLE);
+    parentDbNAme = "Admin";
+  }
+}
+NotAdminlink.setOnClickListener(new view.OnClickListener()){
+  @Override
+  public void onClick(View view){
+    LoginButton.setText("Login");
+    AdminLink.setVisbility(View.VISIBLE);
+    NotAdminlink.setVisbility(View.INVISIBLE);
+    parentDbNAme = "Users";
+  }
+}
+
+// then add user and admin in the database
+// chcek the password so to check the password go to Roofref.addlistner
+//block and change the get password
+
+if (parentDbNAme.equalsIgnoreCase("Admins")){
+  Toast.makeText(LoginACtivity.this, "welcome admini, you are logged in succesfull");
+  loadingBar.dismiss();
+
+  Intent intent = new Intent(LoginACtivity.this, AdminAdnew.class);
+  startActivity(intent)
+}
+else if (parentDbNAme.equalsIgnoreCase("Users")){
+  Toast.makeText(LoginACtivity.this, "logged in succesfull");
+  loadingBar.dismiss();
+
+  Intent intent = new Intent(LoginACtivity.this, HomeActivity.class);
+  startActivity(intent)
+}
+
+// create an empty activity AdminAdnew.java
+// create another AdminCatagoryAdmin.java
+// go to the layout video 10 starts 02:00
+
+public class AdminCatagoryAdmin extands com.Nile.Example
+{
+  private ImageView fiction, Nonfiction , poetry , History;
+  @Override
+  protected void onCreate(Bundle SavedInstanceStates)
+  {
+    super.onCreate(SavedInstanceStates)
+    setContentView(R.layout.acitvity_admin_catagory);
+
+
+    fiction.setOnClickListener(new View.OnClickListener()) {
+      @Override
+      public void onClick(view view)
+      {
+        Intent intent = new Intent(AdminCatagoryAdmin.this, AdminAdnew.class);
+        intent.putExtra("Catagory", "fiction");
+        startActivity(intent);
+
+      }
+    }
+    Nonfiction.setOnClickListener(new View.OnClickListener()) {
+      @Override
+      public void onClick(view view)
+      {
+        Intent intent = new Intent(AdminCatagoryAdmin.this, AdminAdnew.class);
+        intent.putExtra("Catagory", "Nonfiction");
+        startActivity(intent);
+
+      }
+    }
+    poem.setOnClickListener(new View.OnClickListener()) {
+      @Override
+      public void onClick(view view)
+      {
+        Intent intent = new Intent(AdminCatagoryAdmin.this, AdminAdnew.class);
+        intent.putExtra("Catagory", "poem");
+        startActivity(intent);
+
+      }
+    }
+    History.setOnClickListener(new View.OnClickListener()) {
+      @Override
+      public void onClick(view view)
+      {
+        Intent intent = new Intent(AdminCatagoryAdmin.this, AdminAdnew.class);
+        intent.putExtra("Catagory", "History");
+        startActivity(intent);
+
+      }
+    }
+
+
+  });
+}
+
+// go to the AdminAdnew class and create the Catagory
+
+public class AdminAdnew extands com.Nile.Example
+{
+  private String CatagoryName;
+  private Button AddnewProductButton;
+  private ImageView InputProductImage;
+  private EditText InputProductName,InputProductPrice;
+
+
+
+  @Override
+  protected void onCreate(Bundle SavedInstanceStates)
+  {
+    super.onCreate(SavedInstanceStates)
+    setContentView(R.layout.acitvity_admin_catagory);
+
+     CatagoryName = getIntent().getExtras().get("Catagory").toString();
+
+    Toast.makeText(this.CatagoryName, Toast.LENGTH_SHORT).show();
+    AddnewProductButton = (Button) findViewById(R.id.add_new_poduct);
+    InputProductImage = (ImageView) findViewById(R.id.add_new_Image);
+    InputProductName = (EditText) findViewById(R.id.add_product_name);
+    InputProductprice = (EditText) findViewById(R.id.add_product_price);
+    }
+  }
+}
